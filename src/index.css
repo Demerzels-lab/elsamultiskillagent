@@ -1,0 +1,133 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --radius: 12px;
+  }
+
+  * {
+    @apply border-border-subtle;
+  }
+
+  html {
+    @apply scroll-smooth;
+  }
+
+  body {
+    @apply bg-page text-text-primary font-sans antialiased;
+    font-feature-settings: "rlig" 1, "calt" 1;
+  }
+
+  /* Custom scrollbar for dark theme */
+  ::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+  }
+
+  ::-webkit-scrollbar-track {
+    @apply bg-surface;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    @apply bg-border-subtle rounded-full;
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    @apply bg-text-tertiary;
+  }
+}
+
+@layer components {
+  /* Neon glow effect for primary buttons */
+  .btn-primary {
+    @apply bg-brand text-black font-semibold px-6 py-3 rounded-lg transition-all duration-200;
+    box-shadow: 0 0 15px rgba(57, 255, 20, 0.15);
+  }
+
+  .btn-primary:hover {
+    box-shadow: 0 0 25px rgba(57, 255, 20, 0.4);
+    transform: translateY(-2px);
+  }
+
+  .btn-primary:active {
+    transform: scale(0.98);
+  }
+
+  /* Ghost button style */
+  .btn-ghost {
+    @apply bg-transparent border border-border-subtle text-text-primary px-6 py-3 rounded-lg transition-all duration-200;
+  }
+
+  .btn-ghost:hover {
+    @apply border-brand text-brand bg-brand/5;
+  }
+
+  /* Card component */
+  .card {
+    @apply bg-surface border border-border-subtle rounded-lg transition-all duration-200;
+  }
+
+  .card:hover {
+    @apply border-brand/30;
+    transform: translateY(-4px);
+  }
+
+  /* Input with neon focus */
+  .input-neon {
+    @apply bg-surface border border-border-subtle rounded-lg px-4 py-3 text-text-primary placeholder-text-tertiary outline-none transition-all duration-200;
+  }
+
+  .input-neon:focus {
+    @apply border-brand;
+    box-shadow: 0 0 0 3px rgba(57, 255, 20, 0.1);
+  }
+
+  /* Category pill */
+  .pill {
+    @apply inline-flex items-center px-3 py-1 bg-surface-hover text-text-secondary text-sm rounded-full transition-colors duration-200;
+  }
+
+  .pill:hover {
+    @apply bg-brand/10 text-brand;
+  }
+
+  .pill.active {
+    @apply bg-brand/20 text-brand border border-brand/30;
+  }
+
+  /* Code snippet block */
+  .code-block {
+    @apply bg-surface border border-border-subtle rounded-lg p-4 font-mono text-sm overflow-x-auto;
+  }
+
+  /* Skeleton loading */
+  .skeleton {
+    @apply bg-surface animate-pulse rounded;
+  }
+
+  /* Gradient background for hero */
+  .hero-gradient {
+    background: radial-gradient(ellipse at 50% 0%, rgba(57, 255, 20, 0.08) 0%, transparent 60%);
+  }
+}
+
+@layer utilities {
+  /* Text gradient */
+  .text-gradient {
+    @apply bg-clip-text text-transparent bg-gradient-to-r from-brand to-brand-400;
+  }
+
+  /* Neon text effect */
+  .neon-text {
+    text-shadow: 0 0 10px rgba(57, 255, 20, 0.5), 0 0 20px rgba(57, 255, 20, 0.3);
+  }
+
+  /* Backdrop blur for navbar */
+  .nav-blur {
+    @apply backdrop-blur-md bg-page/80;
+  }
+}

@@ -1,0 +1,157 @@
+[
+  {
+    "name": "Web & Frontend Development",
+    "count": 46,
+    "slug": "web-frontend-development"
+  },
+  {
+    "name": "Coding Agents & IDEs",
+    "count": 55,
+    "slug": "coding-agents-ides"
+  },
+  {
+    "name": "Git & GitHub",
+    "count": 34,
+    "slug": "git-github"
+  },
+  {
+    "name": "Moltbook",
+    "count": 27,
+    "slug": "moltbook"
+  },
+  {
+    "name": "DevOps & Cloud",
+    "count": 143,
+    "slug": "devops-cloud"
+  },
+  {
+    "name": "Browser & Automation",
+    "count": 69,
+    "slug": "browser-automation"
+  },
+  {
+    "name": "Image & Video Generation",
+    "count": 38,
+    "slug": "image-video-generation"
+  },
+  {
+    "name": "Apple Apps & Services",
+    "count": 32,
+    "slug": "apple-apps-services"
+  },
+  {
+    "name": "Search & Research",
+    "count": 144,
+    "slug": "search-research"
+  },
+  {
+    "name": "Clawdbot Tools",
+    "count": 105,
+    "slug": "clawdbot-tools"
+  },
+  {
+    "name": "CLI Utilities",
+    "count": 88,
+    "slug": "cli-utilities"
+  },
+  {
+    "name": "Marketing & Sales",
+    "count": 92,
+    "slug": "marketing-sales"
+  },
+  {
+    "name": "Productivity & Tasks",
+    "count": 92,
+    "slug": "productivity-tasks"
+  },
+  {
+    "name": "AI & LLMs",
+    "count": 159,
+    "slug": "ai-llms"
+  },
+  {
+    "name": "Data & Analytics",
+    "count": 17,
+    "slug": "data-analytics"
+  },
+  {
+    "name": "Finance",
+    "count": 22,
+    "slug": "finance"
+  },
+  {
+    "name": "Media & Streaming",
+    "count": 40,
+    "slug": "media-streaming"
+  },
+  {
+    "name": "Notes & PKM",
+    "count": 62,
+    "slug": "notes-pkm"
+  },
+  {
+    "name": "iOS & macOS Development",
+    "count": 14,
+    "slug": "ios-macos-development"
+  },
+  {
+    "name": "Transportation",
+    "count": 56,
+    "slug": "transportation"
+  },
+  {
+    "name": "Personal Development",
+    "count": 38,
+    "slug": "personal-development"
+  },
+  {
+    "name": "Health & Fitness",
+    "count": 35,
+    "slug": "health-fitness"
+  },
+  {
+    "name": "Communication",
+    "count": 58,
+    "slug": "communication"
+  },
+  {
+    "name": "Speech & Transcription",
+    "count": 44,
+    "slug": "speech-transcription"
+  },
+  {
+    "name": "Smart Home & IoT",
+    "count": 50,
+    "slug": "smart-home-iot"
+  },
+  {
+    "name": "Shopping & E-commerce",
+    "count": 34,
+    "slug": "shopping-e-commerce"
+  },
+  {
+    "name": "Calendar & Scheduling",
+    "count": 28,
+    "slug": "calendar-scheduling"
+  },
+  {
+    "name": "PDF & Documents",
+    "count": 35,
+    "slug": "pdf-documents"
+  },
+  {
+    "name": "Self-Hosted & Automation",
+    "count": 16,
+    "slug": "self-hosted-automation"
+  },
+  {
+    "name": "Security & Passwords",
+    "count": 21,
+    "slug": "security-passwords"
+  },
+  {
+    "name": "Gaming",
+    "count": 14,
+    "slug": "gaming"
+  }
+]
