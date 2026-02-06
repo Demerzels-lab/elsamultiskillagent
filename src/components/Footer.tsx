@@ -1,5 +1,4 @@
-import { Link } from 'react-router-dom'
-import { Github, Twitter, Heart } from 'lucide-react'
+import { Github, Twitter } from 'lucide-react'
 
 export function Footer() {
   return (

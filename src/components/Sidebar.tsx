@@ -1,8 +1,6 @@
 import { Link, useLocation } from 'react-router-dom'
 import { useAuth } from '../context/AuthContext'
-import { useSkills } from '../hooks/useSkills'
 import { 
-  Search, 
   LayoutDashboard, 
   Globe, 
   BookOpen, 
@@ -10,14 +8,12 @@ import {
   LogOut, 
   User, 
   BookmarkIcon,
-  Menu,
-  X
+  Search,
+  Terminal
 } from 'lucide-react'
-import { useState } from 'react'
 
 export function Sidebar() {
   const { user, signOut } = useAuth()
-  const { categories } = useSkills()
   const location = useLocation()
   
   const isActive = (path: string) => location.pathname === path
@@ -36,73 +32,47 @@ export function Sidebar() {
       <div className="p-6 border-b border-white/10 flex-shrink-0">
         <Link to="/">
           <div className="flex items-center gap-3 font-bold text-xl cursor-pointer group">
-            <div className="relative w-11 h-11 rounded-full overflow-hidden border-2 border-white/20 group-hover:border-primary transition-colors shadow-lg shadow-white/5 group-hover:shadow-primary/20 bg-surface flex items-center justify-center">
-               <span className="text-primary text-xl">E</span>
+            <div className="relative w-10 h-10 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center group-hover:border-primary/50 transition-colors">
+               <Terminal className="w-5 h-5 text-primary" />
             </div>
             <div className="flex flex-col">
               <span className="text-white font-semibold tracking-tight leading-none group-hover:text-primary transition-colors">Elsa</span>
-              <span className="text-[10px] text-white/40 uppercase tracking-[0.2em] font-medium group-hover:text-white/60 transition-colors">AGENT</span>
+              <span className="text-[10px] text-white/40 uppercase tracking-[0.2em] font-medium">Protocol</span>
             </div>
           </div>
         </Link>
         
         {/* Search Input */}
-        <div className="mt-5 relative group">
+        <div className="mt-6 relative group">
           <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-white/30 group-focus-within:text-primary/50 transition-colors" />
           <input 
             type="text"
-            className="h-9 w-full bg-white/5 border border-white/10 rounded-lg pl-10 pr-3 text-sm text-white/80 placeholder:text-white/30 focus:outline-none focus:border-primary/50 focus:bg-white/8 transition-all"
-            placeholder="Search skills..."
+            className="h-10 w-full bg-black border border-white/10 rounded-lg pl-10 pr-3 text-sm text-white/80 placeholder:text-white/30 focus:outline-none focus:border-primary/50 focus:bg-white/5 transition-all"
+            placeholder="Quick search..."
           />
         </div>
       </div>
 
-      {/* Scrollable Content */}
-      <div className="flex-1 overflow-y-auto px-4 py-6 space-y-8 scrollbar-hide">
-        
-        {/* Main Navigation */}
-        <div>
-          <h3 className="mb-3 px-2 text-[11px] font-semibold text-white/40 uppercase tracking-[0.2em]">Platform</h3>
-          <div className="space-y-1">
-            {mainLinks.map((link) => {
-              const Icon = link.icon
-              const active = isActive(link.path)
-              return (
-                <Link key={link.path} to={link.path}>
-                  <button className={`
-                    w-full flex items-center gap-3 px-4 py-2 rounded-md text-sm font-medium transition-all duration-200
-                    ${active 
-                      ? 'bg-primary/10 text-primary border border-primary/20' 
-                      : 'text-white/60 hover:text-white hover:bg-white/5 border border-transparent'}
-                  `}>
-                    <Icon className={`w-4 h-4 ${active ? 'text-primary' : 'opacity-70'}`} />
-                    {link.label}
-                  </button>
-                </Link>
-              )
-            })}
-          </div>
-        </div>
-
-        {/* Dynamic Categories from useSkills */}
-        <div>
-           <div className="flex items-center justify-between px-2 mb-3">
-            <h3 className="text-[11px] font-semibold text-white/40 uppercase tracking-[0.2em]">Categories ({categories.length})</h3>
-           </div>
-           <div className="space-y-1">
-             {categories.map((cat) => (
-               <Link key={cat.slug} to={`/browse?category=${encodeURIComponent(cat.name)}`}>
-                 <button className="w-full flex items-center justify-between px-4 py-2 rounded-md text-sm transition-all duration-200 text-white/60 hover:text-white hover:bg-white/5 group">
-                   <div className="flex items-center gap-3 truncate">
-                     <div className="w-1.5 h-1.5 rounded-full bg-white/20 group-hover:bg-primary transition-colors"></div>
-                     <span className="truncate">{cat.name}</span>
-                   </div>
-                   <span className="text-[10px] text-white/20 group-hover:text-white/40">{cat.count}</span>
-                 </button>
-               </Link>
-             ))}
-           </div>
-        </div>
+      {/* Navigation Links */}
+      <div className="flex-1 overflow-y-auto px-4 py-6 space-y-2">
+        <div className="mb-2 px-2 text-[10px] font-semibold text-white/20 uppercase tracking-[0.2em]">Menu</div>
+        {mainLinks.map((link) => {
+          const Icon = link.icon
+          const active = isActive(link.path)
+          return (
+            <Link key={link.path} to={link.path}>
+              <button className={`
+                w-full flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium transition-all duration-200
+                ${active 
+                  ? 'bg-primary/10 text-primary border border-primary/20 shadow-[0_0_15px_rgba(var(--primary),0.1)]' 
+                  : 'text-white/60 hover:text-white hover:bg-white/5 border border-transparent'}
+              `}>
+                <Icon className={`w-4 h-4 ${active ? 'text-primary' : 'opacity-70'}`} />
+                {link.label}
+              </button>
+            </Link>
+          )
+        })}
       </div>
 
       {/* User / Auth Footer */}
@@ -114,8 +84,8 @@ export function Sidebar() {
                 <User className="w-4 h-4 text-primary" />
               </div>
               <div className="flex flex-col truncate">
-                <span className="text-xs font-medium text-white truncate">{user.email?.split('@')[0]}</span>
-                <span className="text-[10px] text-white/40 truncate">Free Plan</span>
+                <span className="text-xs font-medium text-white truncate">User</span>
+                <span className="text-[10px] text-white/40 truncate">{user.email}</span>
               </div>
             </div>
             <button 

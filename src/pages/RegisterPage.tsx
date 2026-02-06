@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import { useAuth } from '../context/AuthContext'
-import { Mail, Lock, User, ArrowRight, Loader2, AlertCircle } from 'lucide-react'
+import { Mail, Lock, ArrowRight, Loader2, AlertCircle } from 'lucide-react'
 
 export function RegisterPage() {
   const [email, setEmail] = useState('')

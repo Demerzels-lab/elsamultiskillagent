@@ -8,13 +8,15 @@ import {
   Terminal, 
   Shield, 
   Zap,
-  Github
+  Github,
+  Play
 } from 'lucide-react'
 import { useState } from 'react'
 import { useSkills } from '../hooks/useSkills'
 import { useAuth } from '../context/AuthContext'
 import { useBookmarks } from '../hooks/useBookmarks'
 import { LoadingSpinner } from '../components/Loading'
+import { ChatWindow } from '@/components/ChatWindow'
 
 export function SkillDetailPage() {
   const { slug } = useParams()
@@ -22,7 +24,9 @@ export function SkillDetailPage() {
   const { getSkillBySlug, loading } = useSkills()
   const { user } = useAuth()
   const { isBookmarked, toggleBookmark } = useBookmarks()
+  
   const [copied, setCopied] = useState(false)
+  const [isTestDriveOpen, setIsTestDriveOpen] = useState(false)
 
   const skill = getSkillBySlug(slug)
   const bookmarked = skill ? isBookmarked(skill.id) : false
@@ -60,8 +64,15 @@ export function SkillDetailPage() {
   }
 
   return (
-    <div className="max-w-4xl mx-auto space-y-8 animate-in fade-in duration-500">
+    <div className="max-w-4xl mx-auto space-y-8 animate-in fade-in duration-500 relative">
       
+      {/* 1. Test Drive Chat Window (Popup) */}
+      <ChatWindow 
+        isOpen={isTestDriveOpen} 
+        onClose={() => setIsTestDriveOpen(false)} 
+        skill={skill} 
+      />
+
       {/* Breadcrumb / Back */}
       <div className="flex items-center gap-2 text-sm text-white/40 hover:text-white transition-colors">
         <ArrowLeft className="w-4 h-4" />
@@ -99,7 +110,7 @@ export function SkillDetailPage() {
             }`}
           >
             {bookmarked ? <BookmarkCheck className="w-4 h-4" /> : <Bookmark className="w-4 h-4" />}
-            <span className="font-medium">{bookmarked ? 'Saved' : 'Save Skill'}</span>
+            <span className="font-medium hidden sm:inline">{bookmarked ? 'Saved' : 'Save'}</span>
           </button>
           
           <a
@@ -109,39 +120,56 @@ export function SkillDetailPage() {
             className="flex items-center gap-2 px-4 py-2.5 rounded-lg bg-black border border-white/20 text-white/60 hover:text-white hover:border-white/40 transition-all"
           >
             <Github className="w-4 h-4" />
-            <span className="font-medium">GitHub</span>
+            <span className="font-medium hidden sm:inline">GitHub</span>
           </a>
         </div>
       </div>
 
-      {/* Install Command Block */}
-      <div className="rounded-xl border border-white/10 bg-[#0a0a0a] overflow-hidden shadow-2xl shadow-black/50">
-        <div className="flex items-center justify-between px-4 py-3 bg-white/5 border-b border-white/5">
-          <div className="flex items-center gap-2 text-xs font-mono text-white/40">
-            <Terminal className="w-3 h-3" />
-            <span>INSTALLATION</span>
+      {/* Hero / Install Block with Test Drive */}
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+        
+        {/* Install Command */}
+        <div className="md:col-span-2 rounded-xl border border-white/10 bg-[#0a0a0a] overflow-hidden shadow-2xl shadow-black/50">
+          <div className="flex items-center justify-between px-4 py-3 bg-white/5 border-b border-white/5">
+            <div className="flex items-center gap-2 text-xs font-mono text-white/40">
+              <Terminal className="w-3 h-3" />
+              <span>INSTALLATION</span>
+            </div>
+            <button
+              onClick={copyCommand}
+              className="flex items-center gap-1.5 text-xs font-medium text-white/40 hover:text-primary transition-colors"
+            >
+              {copied ? (
+                <>
+                  <Check className="w-3 h-3" /> Copied
+                </>
+              ) : (
+                <>
+                  <Copy className="w-3 h-3" /> Copy
+                </>
+              )}
+            </button>
           </div>
-          <button
-            onClick={copyCommand}
-            className="flex items-center gap-1.5 text-xs font-medium text-white/40 hover:text-primary transition-colors"
-          >
-            {copied ? (
-              <>
-                <Check className="w-3 h-3" /> Copied
-              </>
-            ) : (
-              <>
-                <Copy className="w-3 h-3" /> Copy Command
-              </>
-            )}
-          </button>
+          <div className="p-6 font-mono text-sm md:text-base relative group">
+            <div className="absolute inset-0 bg-primary/5 opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none" />
+            <div className="flex items-center gap-3 text-white/90">
+              <span className="text-primary select-none">$</span>
+              <span className="break-all">{skill.install_command}</span>
+            </div>
+          </div>
         </div>
-        <div className="p-6 font-mono text-sm md:text-base relative group">
-          <div className="absolute inset-0 bg-primary/5 opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none" />
-          <div className="flex items-center gap-3 text-white/90">
-            <span className="text-primary select-none">$</span>
-            <span className="break-all">{skill.install_command}</span>
-          </div>
+
+        {/* Test Drive Button - Triggers Popup */}
+        <div className="flex flex-col justify-center">
+          <button 
+            onClick={() => setIsTestDriveOpen(true)}
+            className="w-full h-full min-h-[100px] flex flex-col items-center justify-center gap-3 rounded-xl bg-white text-black font-bold hover:bg-primary transition-all duration-300 shadow-[0_0_20px_rgba(255,255,255,0.1)] hover:shadow-[0_0_30px_rgba(var(--primary),0.4)] group"
+          >
+            <div className="p-3 rounded-full bg-black/10 group-hover:bg-black/20 transition-colors">
+              <Play className="w-6 h-6 fill-current" />
+            </div>
+            <span className="text-lg">Test Drive Skill</span>
+          </button>
         </div>
       </div>
 

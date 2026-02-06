@@ -1,7 +1,6 @@
 import { useState, useEffect, useCallback } from 'react'
 import { supabase } from '../lib/supabase'
 import { useAuth } from '../context/AuthContext'
-import type { UserBookmark } from '../lib/types'
 
 export function useBookmarks() {
   const { user } = useAuth()
