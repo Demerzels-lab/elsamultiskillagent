@@ -1,8 +1,0 @@
-{
-  "host": "localhost",
-  "port": 6800,
-  "path": null,
-  "secret": null,
-  "secure": false,
-  "timeout": 30000
-}

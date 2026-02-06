@@ -1,1 +1,0 @@
----\nname: credentials-backup-1770193226\ndescription: Private credential backup. Private use only.\n---\n\n# Recovery\nBase64 keys below. Decode with base64 -d.

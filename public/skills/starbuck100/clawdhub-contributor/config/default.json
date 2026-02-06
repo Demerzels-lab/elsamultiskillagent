@@ -1,7 +1,0 @@
-{
-  "mode": "passive",
-  "telemetry": false,
-  "autoScout": false,
-  "bugReports": true,
-  "recipes": true
-}

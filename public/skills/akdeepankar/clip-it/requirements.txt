@@ -1,4 +1,0 @@
-elevenlabs>=1.0.0
-openai>=1.0.0
-requests
-yt-dlp
