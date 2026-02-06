@@ -100,7 +100,7 @@ export function Footer() {
         {/* Bottom */}
         <div className="mt-12 pt-8 border-t border-border-subtle flex flex-col md:flex-row items-center justify-between gap-4">
           <p className="text-text-tertiary text-sm">
-            2024 Elsamultiskill. All rights reserved.
+            2026 Elsamultiskill. All rights reserved.
           </p>
           <p className="text-text-tertiary text-sm flex items-center gap-1">
             Made with <Heart className="w-4 h-4 text-error" /> for the AI community
