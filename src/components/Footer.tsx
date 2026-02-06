@@ -12,7 +12,7 @@ export function Footer() {
               <div className="w-8 h-8 bg-brand rounded-lg flex items-center justify-center">
                 <span className="text-black font-bold text-lg">E</span>
               </div>
-              <span className="font-semibold text-lg">Elsamultiskill</span>
+              <span className="font-semibold text-lg">Elsamultiskill.Agent</span>
             </Link>
             <p className="text-text-secondary text-sm">
               Discover and install 1700+ AI agent skills for OpenClaw.
@@ -100,7 +100,7 @@ export function Footer() {
         {/* Bottom */}
         <div className="mt-12 pt-8 border-t border-border-subtle flex flex-col md:flex-row items-center justify-between gap-4">
           <p className="text-text-tertiary text-sm">
-            2026 Elsamultiskill. All rights reserved.
+            2026 Elsamultiskill.Agent. All rights reserved.
           </p>
           <p className="text-text-tertiary text-sm flex items-center gap-1">
             Made with <Heart className="w-4 h-4 text-error" /> for the AI community

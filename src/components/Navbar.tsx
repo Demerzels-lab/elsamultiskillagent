@@ -26,7 +26,7 @@ export function Navbar() {
             <div className="w-8 h-8 bg-brand rounded-lg flex items-center justify-center">
               <span className="text-black font-bold text-lg">E</span>
             </div>
-            <span className="font-semibold text-lg hidden sm:block">Elsamultiskill</span>
+            <span className="font-semibold text-lg hidden sm:block">Elsamultiskill.Agent</span>
           </Link>
 
           {/* Desktop Navigation */}
