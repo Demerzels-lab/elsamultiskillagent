@@ -1,243 +1,121 @@
-import { useState, useMemo } from 'react'
-import { Link, useNavigate } from 'react-router-dom'
-import { Search, Zap, Copy, Download, ArrowRight } from 'lucide-react'
+import { Link } from 'react-router-dom'
+import { DashboardTerminal } from '../components/DashboardTerminal'
+import { ArrowRight, Github, Code, Globe, Zap } from 'lucide-react'
 import { useSkills } from '../hooks/useSkills'
-import { SkillCard } from '../components/SkillCard'
-import { StatsCounter } from '../components/StatsCounter'
-import { SkeletonGrid } from '../components/Loading'
 
 export function HomePage() {
-  const navigate = useNavigate()
-  const { skills, categories, loading } = useSkills()
-  const [searchQuery, setSearchQuery] = useState('')
+  const { skills, categories } = useSkills()
 
-  const featuredSkills = useMemo(
-    () => skills.filter(s => s.featured).slice(0, 6),
-    [skills]
-  )
-
-  const popularSkills = useMemo(
-    () => skills.filter(s => s.popular).slice(0, 8),
-    [skills]
-  )
-
-  const uniqueAuthors = useMemo(
-    () => new Set(skills.map(s => s.author)).size,
-    [skills]
-  )
-
-  const handleSearch = (e: React.FormEvent) => {
-    e.preventDefault()
-    if (searchQuery.trim()) {
-      navigate(`/browse?q=${encodeURIComponent(searchQuery)}`)
-    }
-  }
-
-  const howItWorks = [
-    {
-      icon: Search,
-      title: 'Discover Skills',
-      description: 'Browse 1700+ AI agent skills organized by category.',
-    },
-    {
-      icon: Copy,
-      title: 'Copy Command',
-      description: 'One-click copy the install command to your clipboard.',
-    },
-    {
-      icon: Download,
-      title: 'Install & Use',
-      description: 'Paste the command in your terminal and start using.',
-    },
+  // Calculate quick stats for the hero
+  const stats = [
+    { label: 'Skills', value: skills.length || '40+' },
+    { label: 'Categories', value: categories.length || '7' },
+    { label: 'Agents', value: '6' },
   ]
 
   return (
-    <div className="min-h-screen">
-      {/* Hero Section */}
-      <section className="hero-gradient pt-32 pb-20">
-        <div className="container mx-auto px-4">
-          <div className="max-w-3xl mx-auto text-center">
-            <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 leading-tight">
-              Discover <span className="text-brand">1700+</span> AI Agent Skills
-            </h1>
-            <p className="text-lg md:text-xl text-text-secondary mb-10">
-              The ultimate directory for OpenClaw AI agent skills. 
-              Search, discover, and install skills to supercharge your AI agents.
-            </p>
+    <div className="space-y-24 pb-12">
+      
+      {/* 1. Hero Section */}
+      <section className="relative pt-12 md:pt-20 text-center max-w-5xl mx-auto px-4">
+        {/* Decorative background blur */}
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[400px] bg-primary/10 blur-[100px] rounded-full pointer-events-none -z-10" />
 
-            {/* Search Bar */}
-            <form onSubmit={handleSearch} className="max-w-2xl mx-auto mb-8">
-              <div className="relative">
-                <Search className="absolute left-5 top-1/2 -translate-y-1/2 w-6 h-6 text-text-tertiary" />
-                <input
-                  type="text"
-                  value={searchQuery}
-                  onChange={e => setSearchQuery(e.target.value)}
-                  placeholder="Search skills by name, category, or author..."
-                  className="input-neon w-full h-16 pl-14 pr-32 text-lg"
-                />
-                <button
-                  type="submit"
-                  className="absolute right-2 top-1/2 -translate-y-1/2 btn-primary py-3"
-                >
-                  Search
-                </button>
-              </div>
-            </form>
+        {/* Badge */}
+        <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/5 border border-white/10 text-xs font-medium text-primary mb-8 animate-fade-in">
+          <span className="flex h-2 w-2 relative">
+            <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary opacity-75"></span>
+            <span className="relative inline-flex rounded-full h-2 w-2 bg-primary"></span>
+          </span>
+          v2.0 System Online
+        </div>
 
-            {/* Trending searches */}
-            <div className="flex flex-wrap items-center justify-center gap-2">
-              <span className="text-text-tertiary text-sm">Trending:</span>
-              {['frontend', 'git', 'ai', 'automation'].map(term => (
-                <Link
-                  key={term}
-                  to={`/browse?q=${term}`}
-                  className="pill hover:bg-brand/10 hover:text-brand"
-                >
-                  {term}
-                </Link>
-              ))}
-            </div>
-          </div>
+        {/* Headline */}
+        <h1 className="text-5xl md:text-7xl lg:text-8xl font-bold tracking-tight text-white mb-6 animate-fade-in [animation-delay:200ms]">
+          Orchestrate your <br />
+          <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary via-orange-300 to-primary animate-shimmer bg-[length:200%_auto]">
+            Digital Workforce
+          </span>
+        </h1>
+
+        {/* Subheadline */}
+        <p className="text-lg md:text-xl text-white/50 max-w-2xl mx-auto mb-10 leading-relaxed animate-fade-in [animation-delay:400ms]">
+          The complete ecosystem for AI coding agents. Access 
+          <span className="text-white font-medium"> {skills.length} skills</span>, 
+          deploy specialized agents, and automate complex workflows with a single command.
+        </p>
+
+        {/* CTA Buttons */}
+        <div className="flex flex-col sm:flex-row items-center justify-center gap-4 animate-fade-in [animation-delay:600ms]">
+          <Link to="/browse" className="w-full sm:w-auto">
+            <button className="w-full sm:w-auto px-8 py-4 bg-primary text-black font-bold rounded-lg hover:bg-orange-400 transition-all shadow-[0_0_20px_rgba(var(--primary),0.3)] hover:shadow-[0_0_40px_rgba(var(--primary),0.5)] flex items-center justify-center gap-2 group">
+              Explore Skills
+              <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+            </button>
+          </Link>
+          <Link to="/docs" className="w-full sm:w-auto">
+             <button className="w-full sm:w-auto px-8 py-4 bg-white/5 border border-white/10 text-white font-medium rounded-lg hover:bg-white/10 hover:border-white/20 transition-all flex items-center justify-center gap-2">
+              <Code className="w-4 h-4 text-white/60" />
+              Documentation
+            </button>
+          </Link>
         </div>
       </section>
 
-      {/* Stats Section */}
-      <section className="py-16 border-y border-border-subtle bg-surface">
-        <div className="container mx-auto px-4">
-          <StatsCounter
-            totalSkills={skills.length || 1708}
-            totalCategories={categories.length || 31}
-            totalAuthors={uniqueAuthors || 800}
+      {/* 2. Terminal Demo */}
+      <section className="max-w-4xl mx-auto px-4 animate-fade-in [animation-delay:800ms]">
+        <div className="text-center mb-8">
+          <p className="text-sm text-white/30 uppercase tracking-widest">Interactive Protocol Shell</p>
+        </div>
+        <DashboardTerminal />
+      </section>
+
+      {/* 3. Features Grid */}
+      <section className="container mx-auto px-4">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+          <FeatureCard 
+            icon={Globe}
+            title="Centralized Intelligence"
+            description="A unified registry of skills and prompts, accessible through a single optimized interface."
+          />
+          <FeatureCard 
+            icon={Zap}
+            title="Instant Deployment"
+            description="Copy-paste ready commands to instantly equip your AI agents with new capabilities."
+          />
+          <FeatureCard 
+            icon={Github}
+            title="Open Source Core"
+            description="Built by the community, for the community. Continuously evolving and improving."
           />
         </div>
       </section>
 
-      {/* How It Works */}
-      <section className="py-20">
-        <div className="container mx-auto px-4">
-          <div className="text-center mb-12">
-            <h2 className="text-2xl md:text-3xl font-bold mb-4">How It Works</h2>
-            <p className="text-text-secondary">Get started in three simple steps</p>
-          </div>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-4xl mx-auto">
-            {howItWorks.map((step, index) => (
-              <div key={index} className="text-center">
-                <div className="w-16 h-16 mx-auto mb-4 bg-brand/10 rounded-2xl flex items-center justify-center">
-                  <step.icon className="w-8 h-8 text-brand" />
-                </div>
-                <h3 className="font-semibold text-lg mb-2">{step.title}</h3>
-                <p className="text-text-secondary text-sm">{step.description}</p>
+      {/* 4. Stats Band */}
+      <section className="border-y border-white/5 bg-white/5 backdrop-blur-md">
+        <div className="container mx-auto px-4 py-12">
+          <div className="grid grid-cols-3 gap-8 text-center divide-x divide-white/10">
+            {stats.map((stat) => (
+              <div key={stat.label} className="flex flex-col items-center">
+                <span className="text-4xl md:text-5xl font-bold text-white mb-2">{stat.value}</span>
+                <span className="text-xs text-white/40 uppercase tracking-[0.2em]">{stat.label}</span>
               </div>
             ))}
           </div>
         </div>
       </section>
+    </div>
+  )
+}
 
-      {/* Featured Skills */}
-      <section className="py-20 bg-surface">
-        <div className="container mx-auto px-4">
-          <div className="flex items-center justify-between mb-8">
-            <div>
-              <h2 className="text-2xl md:text-3xl font-bold mb-2">Featured Skills</h2>
-              <p className="text-text-secondary">Hand-picked skills to get you started</p>
-            </div>
-            <Link
-              to="/browse?featured=true"
-              className="hidden md:flex items-center gap-2 text-brand hover:underline"
-            >
-              View all <ArrowRight className="w-4 h-4" />
-            </Link>
-          </div>
-          {loading ? (
-            <SkeletonGrid count={6} />
-          ) : (
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-              {(featuredSkills.length > 0 ? featuredSkills : skills.slice(0, 6)).map(skill => (
-                <SkillCard key={skill.id} skill={skill} />
-              ))}
-            </div>
-          )}
-        </div>
-      </section>
-
-      {/* Popular Skills */}
-      <section className="py-20">
-        <div className="container mx-auto px-4">
-          <div className="flex items-center justify-between mb-8">
-            <div>
-              <h2 className="text-2xl md:text-3xl font-bold mb-2">Popular Skills</h2>
-              <p className="text-text-secondary">Most installed skills this month</p>
-            </div>
-            <Link
-              to="/browse?popular=true"
-              className="hidden md:flex items-center gap-2 text-brand hover:underline"
-            >
-              View all <ArrowRight className="w-4 h-4" />
-            </Link>
-          </div>
-          {loading ? (
-            <SkeletonGrid count={8} />
-          ) : (
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
-              {(popularSkills.length > 0 ? popularSkills : skills.slice(0, 8)).map(skill => (
-                <SkillCard key={skill.id} skill={skill} compact />
-              ))}
-            </div>
-          )}
-        </div>
-      </section>
-
-      {/* Categories */}
-      <section className="py-20 bg-surface">
-        <div className="container mx-auto px-4">
-          <div className="text-center mb-12">
-            <h2 className="text-2xl md:text-3xl font-bold mb-4">Browse by Category</h2>
-            <p className="text-text-secondary">Explore skills across {categories.length} categories</p>
-          </div>
-          <div className="flex flex-wrap justify-center gap-3 max-w-4xl mx-auto">
-            {categories.slice(0, 15).map(category => (
-              <Link
-                key={category.slug}
-                to={`/browse?category=${encodeURIComponent(category.name)}`}
-                className="pill"
-              >
-                {category.name}
-                <span className="ml-2 text-text-tertiary">{category.count}</span>
-              </Link>
-            ))}
-            <Link
-              to="/dashboard"
-              className="pill bg-brand/10 text-brand border border-brand/30"
-            >
-              View all categories
-            </Link>
-          </div>
-        </div>
-      </section>
-
-      {/* CTA Section */}
-      <section className="py-20">
-        <div className="container mx-auto px-4">
-          <div className="max-w-2xl mx-auto text-center bg-surface border border-border-subtle rounded-2xl p-12">
-            <Zap className="w-12 h-12 text-brand mx-auto mb-6" />
-            <h2 className="text-2xl md:text-3xl font-bold mb-4">
-              Ready to supercharge your AI agent?
-            </h2>
-            <p className="text-text-secondary mb-8">
-              Browse our collection of 1700+ skills and find the perfect tools for your project.
-            </p>
-            <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-              <Link to="/browse" className="btn-primary w-full sm:w-auto">
-                Browse Skills
-              </Link>
-              <Link to="/docs" className="btn-ghost w-full sm:w-auto">
-                Read Documentation
-              </Link>
-            </div>
-          </div>
-        </div>
-      </section>
+function FeatureCard({ icon: Icon, title, description }: { icon: any, title: string, description: string }) {
+  return (
+    <div className="p-6 rounded-2xl bg-white/5 border border-white/10 hover:border-primary/30 transition-colors group">
+      <div className="w-12 h-12 rounded-lg bg-black border border-white/10 flex items-center justify-center mb-4 group-hover:border-primary/50 transition-colors">
+        <Icon className="w-6 h-6 text-white/60 group-hover:text-primary transition-colors" />
+      </div>
+      <h3 className="text-lg font-bold text-white mb-2">{title}</h3>
+      <p className="text-white/50 leading-relaxed text-sm">{description}</p>
     </div>
   )
 }

@@ -9,6 +9,7 @@ export interface Skill {
   install_command: string
   featured: boolean
   popular: boolean
+  tags?: string[] // Added optional tags property
 }
 
 export interface Category {

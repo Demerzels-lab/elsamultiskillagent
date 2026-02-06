@@ -8,7 +8,7 @@ import { Pagination } from '../components/Pagination'
 import { SkeletonGrid } from '../components/Loading'
 import { Package, SearchX } from 'lucide-react'
 
-const ITEMS_PER_PAGE = 20
+const ITEMS_PER_PAGE = 18 
 
 export function BrowsePage() {
   const [searchParams, setSearchParams] = useSearchParams()
@@ -45,101 +45,109 @@ export function BrowsePage() {
   }, [filteredSkills, currentPage])
 
   return (
-    <div className="min-h-screen pt-24 pb-16">
-      <div className="container mx-auto px-4">
-        {/* Header */}
-        <div className="mb-8">
-          <h1 className="text-3xl font-bold mb-2">Browse Skills</h1>
-          <p className="text-text-secondary">
-            Discover and install {skills.length.toLocaleString()} AI agent skills
-          </p>
-        </div>
+    <div className="space-y-8 animate-in fade-in duration-500">
+      
+      {/* Page Header */}
+      <div>
+        <h1 className="text-3xl md:text-4xl font-bold mb-3 text-white">Browse Skills</h1>
+        <p className="text-white/50 text-lg">
+          Discover and install <span className="text-white">{skills.length.toLocaleString()}</span> AI agent skills
+        </p>
+      </div>
 
-        {/* Search and Filter Bar */}
-        <div className="flex flex-col md:flex-row gap-4 mb-8">
-          <div className="flex-1">
-            <SearchBar
-              value={searchQuery}
-              onChange={setSearchQuery}
-              placeholder="Search by name, description, or author..."
-            />
-          </div>
-          <CategoryFilter
+      {/* Search Bar & Mobile Filter */}
+      <div className="flex flex-col md:flex-row gap-4">
+        <div className="flex-1">
+          <SearchBar
+            value={searchQuery}
+            onChange={setSearchQuery}
+            placeholder="Search by name, description, or author..."
+          />
+        </div>
+        
+        {/* Mobile Filter Button Placeholder (Rendered by CategoryFilter) */}
+        <div className="md:hidden">
+           <CategoryFilter
+            categories={categories}
+            selected={selectedCategories}
+            onChange={setSelectedCategories}
+          />
+        </div>
+      </div>
+
+      <div className="flex gap-8 items-start">
+        {/* Desktop Sidebar Filter */}
+        <div className="hidden md:block">
+           <CategoryFilter
             categories={categories}
             selected={selectedCategories}
             onChange={setSelectedCategories}
           />
         </div>
 
-        <div className="flex gap-8">
-          {/* Desktop Category Sidebar - handled by CategoryFilter */}
-          <CategoryFilter
-            categories={categories}
-            selected={selectedCategories}
-            onChange={setSelectedCategories}
-          />
-
-          {/* Main Content */}
-          <div className="flex-1 min-w-0">
-            {/* Results Header */}
-            <div className="flex items-center justify-between mb-6">
-              <div className="flex items-center gap-2 text-text-secondary">
-                <Package className="w-5 h-5" />
-                <span>
-                  {filteredSkills.length.toLocaleString()} skill
-                  {filteredSkills.length !== 1 ? 's' : ''} found
-                </span>
-              </div>
-              {(searchQuery || selectedCategories.length > 0) && (
-                <button
-                  onClick={() => {
-                    setSearchQuery('')
-                    setSelectedCategories([])
-                  }}
-                  className="text-sm text-brand hover:underline"
-                >
-                  Clear filters
-                </button>
-              )}
+        {/* Main Grid Content */}
+        <div className="flex-1 min-w-0">
+          
+          {/* Results Count & Clear */}
+          <div className="flex items-center justify-between mb-6">
+            <div className="flex items-center gap-2 text-white/50 text-sm">
+              <Package className="w-4 h-4" />
+              <span>
+                {filteredSkills.length.toLocaleString()} skill
+                {filteredSkills.length !== 1 ? 's' : ''} found
+              </span>
             </div>
+            {(searchQuery || selectedCategories.length > 0) && (
+              <button
+                onClick={() => {
+                  setSearchQuery('')
+                  setSelectedCategories([])
+                }}
+                className="text-sm text-primary hover:underline"
+              >
+                Clear filters
+              </button>
+            )}
+          </div>
 
-            {/* Skills Grid */}
-            {loading ? (
-              <SkeletonGrid count={12} />
-            ) : filteredSkills.length === 0 ? (
-              <div className="text-center py-16">
-                <SearchX className="w-16 h-16 text-text-tertiary mx-auto mb-4" />
-                <h3 className="text-xl font-semibold mb-2">No skills found</h3>
-                <p className="text-text-secondary mb-6">
-                  Try adjusting your search or filter criteria
-                </p>
-                <button
-                  onClick={() => {
-                    setSearchQuery('')
-                    setSelectedCategories([])
-                  }}
-                  className="btn-ghost"
-                >
-                  Clear all filters
-                </button>
+          {/* Grid */}
+          {loading ? (
+            <SkeletonGrid count={9} />
+          ) : filteredSkills.length === 0 ? (
+            <div className="text-center py-24 border border-dashed border-white/10 rounded-xl bg-white/5">
+              <SearchX className="w-16 h-16 text-white/20 mx-auto mb-4" />
+              <h3 className="text-xl font-semibold mb-2 text-white">No skills found</h3>
+              <p className="text-white/40 mb-6 max-w-sm mx-auto">
+                We couldn't find any skills matching your criteria. Try adjusting your search.
+              </p>
+              <button
+                onClick={() => {
+                  setSearchQuery('')
+                  setSelectedCategories([])
+                }}
+                className="px-6 py-2 bg-white/10 hover:bg-white/20 text-white rounded-lg transition-colors"
+              >
+                Clear all filters
+              </button>
+            </div>
+          ) : (
+            <>
+              <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6 mb-12">
+                {paginatedSkills.map(skill => (
+                  <SkillCard key={skill.id} skill={skill} />
+                ))}
               </div>
-            ) : (
-              <>
-                <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-4 mb-8">
-                  {paginatedSkills.map(skill => (
-                    <SkillCard key={skill.id} skill={skill} />
-                  ))}
-                </div>
 
-                {/* Pagination */}
+              {/* Pagination */}
+              {totalPages > 1 && (
                 <Pagination
                   currentPage={currentPage}
                   totalPages={totalPages}
                   onPageChange={setCurrentPage}
                 />
-              </>
-            )}
-          </div>
+              )}
+            </>
+          )}
         </div>
       </div>
     </div>

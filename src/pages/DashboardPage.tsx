@@ -1,237 +1,201 @@
-import { useMemo, useEffect, useRef } from 'react'
-import { Link } from 'react-router-dom'
-import * as echarts from 'echarts'
 import { useSkills } from '../hooks/useSkills'
+import { Link } from 'react-router-dom'
+import { DashboardTerminal } from '../components/DashboardTerminal'
 import { LoadingSpinner } from '../components/Loading'
-import { BarChart3, PieChart, TrendingUp } from 'lucide-react'
+import { 
+  ArrowRight, 
+  Github, 
+  Bot, 
+  Code, 
+  Zap, 
+  Cpu, 
+  Layers, 
+  BookOpen 
+} from 'lucide-react'
 
-function EChart({ option, height = 400 }: { option: any; height?: number }) {
-  const chartRef = useRef<HTMLDivElement>(null)
-  const chartInstance = useRef<echarts.ECharts | null>(null)
-
-  useEffect(() => {
-    if (!chartRef.current) return
-
-    chartInstance.current = echarts.init(chartRef.current)
-    chartInstance.current.setOption(option)
-
-    const handleResize = () => {
-      chartInstance.current?.resize()
-    }
-
-    window.addEventListener('resize', handleResize)
-
-    return () => {
-      window.removeEventListener('resize', handleResize)
-      chartInstance.current?.dispose()
-    }
-  }, [option])
-
-  return <div ref={chartRef} style={{ height }} />
+// Helper to pick icons based on category name
+const getCategoryIcon = (name: string) => {
+  const n = name.toLowerCase()
+  if (n.includes('ai') || n.includes('agent')) return Bot
+  if (n.includes('doc')) return BookOpen
+  if (n.includes('dev') || n.includes('code')) return Code
+  if (n.includes('plan')) return Zap
+  if (n.includes('design') || n.includes('frontend')) return Layers
+  return Cpu
 }
 
 export function DashboardPage() {
   const { skills, categories, loading } = useSkills()
 
-  const sortedCategories = useMemo(
-    () => [...categories].sort((a, b) => b.count - a.count),
-    [categories]
-  )
-
-  const top10Categories = sortedCategories.slice(0, 10)
-
-  // Bar Chart Option
-  const barChartOption = useMemo(
-    () => ({
-      tooltip: {
-        trigger: 'axis',
-        axisPointer: { type: 'shadow' },
-        backgroundColor: '#121212',
-        borderColor: '#262626',
-        textStyle: { color: '#fff' },
-      },
-      grid: {
-        left: '3%',
-        right: '4%',
-        bottom: '15%',
-        top: '10%',
-        containLabel: true,
-      },
-      xAxis: {
-        type: 'category',
-        data: top10Categories.map(c => c.name.length > 15 ? c.name.slice(0, 15) + '...' : c.name),
-        axisLabel: {
-          color: '#a0a0a0',
-          rotate: 45,
-          fontSize: 10,
-        },
-        axisLine: { lineStyle: { color: '#262626' } },
-      },
-      yAxis: {
-        type: 'value',
-        axisLabel: { color: '#a0a0a0' },
-        axisLine: { lineStyle: { color: '#262626' } },
-        splitLine: { lineStyle: { color: '#262626' } },
-      },
-      series: [
-        {
-          data: top10Categories.map((c, i) => ({
-            value: c.count,
-            itemStyle: {
-              color: i === 0 ? '#39ff14' : i < 3 ? '#22c55e' : '#15803d',
-            },
-          })),
-          type: 'bar',
-          barWidth: '60%',
-        },
-      ],
-    }),
-    [top10Categories]
-  )
-
-  // Treemap Option
-  const treemapOption = useMemo(
-    () => ({
-      tooltip: {
-        formatter: (params: any) => `${params.name}: ${params.value} skills`,
-        backgroundColor: '#121212',
-        borderColor: '#262626',
-        textStyle: { color: '#fff' },
-      },
-      series: [
-        {
-          type: 'treemap',
-          data: sortedCategories.map((c, i) => ({
-            name: c.name,
-            value: c.count,
-            itemStyle: {
-              color: i === 0 ? '#39ff14' : i < 5 ? '#22c55e' : i < 10 ? '#15803d' : '#166534',
-            },
-          })),
-          label: {
-            show: true,
-            formatter: '{b}',
-            fontSize: 11,
-            color: '#fff',
-          },
-          breadcrumb: { show: false },
-          levels: [
-            {
-              itemStyle: {
-                borderColor: '#0a0a0a',
-                borderWidth: 2,
-                gapWidth: 2,
-              },
-            },
-          ],
-        },
-      ],
-    }),
-    [sortedCategories]
-  )
-
   if (loading) {
     return (
-      <div className="min-h-screen pt-24 flex items-center justify-center">
+      <div className="min-h-[80vh] flex items-center justify-center">
         <LoadingSpinner size="lg" />
       </div>
     )
   }
 
+  // Calculate stats based on available fields (id, name, category, etc.)
+  const totalSkills = skills.length
+  const totalCategories = categories.length
+  
+  // Logic fix: Filter based on category or name instead of 'tags'
+  const totalAgents = skills.filter(s => 
+    s.category.toLowerCase().includes('agent') || 
+    s.name.toLowerCase().includes('agent')
+  ).length
+
+  // Treat the rest as commands/tools
+  const totalCommands = totalSkills - totalAgents
+
   return (
-    <div className="min-h-screen pt-24 pb-16">
-      <div className="container mx-auto px-4">
-        {/* Header */}
-        <div className="mb-8">
-          <h1 className="text-3xl font-bold mb-2">Ecosystem Overview</h1>
-          <p className="text-text-secondary">
-            Visual breakdown of {skills.length.toLocaleString()} skills across{' '}
-            {categories.length} categories
+    <div className="space-y-16 lg:space-y-24">
+      
+      {/* 1. Hero Section */}
+      <section className="text-center space-y-8 max-w-4xl mx-auto pt-8 md:pt-12">
+        {/* Version Badge */}
+        <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary/10 border border-primary/20 text-sm text-primary shadow-[0_0_15px_rgba(var(--primary),0.15)] hover:shadow-[0_0_25px_rgba(var(--primary),0.25)] transition-shadow cursor-default animate-fade-in">
+          <span className="relative flex h-2 w-2">
+            <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary opacity-75"></span>
+            <span className="relative inline-flex rounded-full h-2 w-2 bg-primary"></span>
+          </span>
+          <span className="font-medium tracking-wide">v2.0.0 Available Now</span>
+        </div>
+
+        {/* Main Heading */}
+        <div className="space-y-6 animate-fade-in [animation-delay:200ms]">
+          <h1 className="text-5xl md:text-7xl font-bold tracking-tight leading-[1.1] text-white">
+            Supercharge your<br />
+            <span className="bg-gradient-to-r from-primary via-white to-primary bg-[length:200%_auto] animate-shimmer bg-clip-text text-transparent">
+              AI Coding Agents
+            </span>
+          </h1>
+          <p className="text-xl text-white/50 leading-relaxed max-w-2xl mx-auto font-light">
+            A curated collection of <span className="text-white font-medium border-b border-primary/30 pb-0.5">{totalSkills} skills</span> and <span className="text-white font-medium border-b border-primary/30 pb-0.5">{totalCategories} categories</span> designed to extend the capabilities of modern AI coding assistants.
           </p>
         </div>
 
-        {/* Stats Cards */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-12">
-          <div className="card p-6">
-            <div className="flex items-center gap-4">
-              <div className="w-12 h-12 bg-brand/10 rounded-xl flex items-center justify-center">
-                <TrendingUp className="w-6 h-6 text-brand" />
-              </div>
-              <div>
-                <p className="text-2xl font-bold">{skills.length.toLocaleString()}</p>
-                <p className="text-text-secondary text-sm">Total Skills</p>
-              </div>
-            </div>
+        {/* Action Buttons */}
+        <div className="flex flex-wrap justify-center gap-4 pt-4 animate-fade-in [animation-delay:400ms]">
+          <Link to="/browse">
+            <button className="h-12 rounded-md bg-white text-black hover:bg-primary hover:text-black border-none shadow-[0_0_20px_rgba(255,255,255,0.1)] hover:shadow-[0_0_30px_rgba(var(--primary),0.4)] font-bold px-8 transition-all duration-300 transform hover:-translate-y-1 flex items-center gap-2">
+              Get Started 
+              <ArrowRight className="w-4 h-4" />
+            </button>
+          </Link>
+          <a href="https://github.com/blackdragonspear62/Molty-XBT" target="_blank" rel="noopener noreferrer">
+            <button className="h-12 rounded-md px-6 bg-transparent border border-white/20 text-white hover:bg-white/5 hover:border-primary/50 hover:text-primary font-medium transition-all flex items-center gap-2">
+              <Github className="w-4 h-4" />
+              View on GitHub
+            </button>
+          </a>
+        </div>
+      </section>
+
+      {/* 2. Interactive Terminal Section */}
+      <section className="relative animate-fade-in [animation-delay:600ms]">
+        <div className="absolute inset-0 bg-gradient-to-b from-transparent via-primary/5 to-transparent blur-3xl -z-10"></div>
+        <div className="text-center mb-10">
+          <h2 className="text-2xl font-bold mb-3 text-white tracking-wide">Try it yourself</h2>
+          <p className="text-white/50">Experience the power of <span className="text-primary font-semibold">Elsa</span> directly in your browser.</p>
+        </div>
+        
+        <DashboardTerminal />
+      </section>
+
+      {/* 3. Stats Row */}
+      <section className="border-y border-white/5 py-12 bg-black/40 backdrop-blur-sm">
+        <div className="flex flex-col md:flex-row justify-around items-center gap-12 md:gap-0">
+          <StatsItem number={totalSkills} label="Total Skills" />
+          <StatsItem number={totalAgents} label="Specialized Agents" />
+          <StatsItem number={totalCommands} label="Slash Commands" />
+          <StatsItem number={totalCategories} label="Categories" />
+        </div>
+      </section>
+
+      {/* 4. Categories Grid */}
+      <section className="space-y-12">
+        <div className="flex items-center justify-between border-b border-white/10 pb-4">
+          <div>
+            <h2 className="text-3xl font-bold tracking-tight text-white">Explore by Category</h2>
+            <p className="text-white/40 mt-2 text-lg">Browse our curated collection of skills and tools</p>
           </div>
-          <div className="card p-6">
-            <div className="flex items-center gap-4">
-              <div className="w-12 h-12 bg-brand/10 rounded-xl flex items-center justify-center">
-                <PieChart className="w-6 h-6 text-brand" />
-              </div>
-              <div>
-                <p className="text-2xl font-bold">{categories.length}</p>
-                <p className="text-text-secondary text-sm">Categories</p>
-              </div>
-            </div>
-          </div>
-          <div className="card p-6">
-            <div className="flex items-center gap-4">
-              <div className="w-12 h-12 bg-brand/10 rounded-xl flex items-center justify-center">
-                <BarChart3 className="w-6 h-6 text-brand" />
-              </div>
-              <div>
-                <p className="text-2xl font-bold">
-                  {Math.round(skills.length / categories.length)}
-                </p>
-                <p className="text-text-secondary text-sm">Avg Skills/Category</p>
-              </div>
-            </div>
-          </div>
+          <Link to="/browse" className="hidden md:flex items-center text-primary hover:text-accent transition-colors text-sm font-medium">
+            View all skills <ArrowRight className="ml-1 w-4 h-4" />
+          </Link>
         </div>
 
-        {/* Charts */}
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-12">
-          {/* Bar Chart */}
-          <div className="card p-6">
-            <h3 className="text-lg font-semibold mb-4">Top 10 Categories</h3>
-            <EChart option={barChartOption} height={400} />
-          </div>
-
-          {/* Treemap */}
-          <div className="card p-6">
-            <h3 className="text-lg font-semibold mb-4">Category Distribution</h3>
-            <EChart option={treemapOption} height={400} />
-          </div>
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          {categories.map((category, idx) => (
+            <CategoryCard 
+              key={category.slug} 
+              category={category} 
+              index={idx}
+            />
+          ))}
         </div>
+      </section>
 
-        {/* All Categories List */}
-        <div className="card p-6">
-          <h3 className="text-lg font-semibold mb-6">All Categories</h3>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3">
-            {sortedCategories.map((category, index) => (
-              <Link
-                key={category.slug}
-                to={`/browse?category=${encodeURIComponent(category.name)}`}
-                className="flex items-center justify-between p-3 bg-surface-hover rounded-lg hover:bg-brand/10 transition-colors group"
-              >
-                <div className="flex items-center gap-3">
-                  <span
-                    className={`w-6 h-6 rounded flex items-center justify-center text-xs font-bold ${
-                      index < 3
-                        ? 'bg-brand text-black'
-                        : 'bg-border-subtle text-text-secondary'
-                    }`}
-                  >
-                    {index + 1}
-                  </span>
-                  <span className="text-sm group-hover:text-brand transition-colors truncate">
-                    {category.name}
-                  </span>
-                </div>
-                <span className="text-text-tertiary text-sm">{category.count}</span>
-              </Link>
-            ))}
-          </div>
+      {/* Footer Note */}
+      <div className="text-center py-12 border-t border-white/5 mt-12 bg-gradient-to-b from-transparent to-primary/5 rounded-t-3xl">
+        <p className="text-sm text-white/30">
+          Built with precision by <span className="text-white/60 font-medium hover:text-primary transition-colors cursor-pointer">Elsa Team</span>
+        </p>
+      </div>
+
+    </div>
+  )
+}
+
+// --- Sub Components for Dashboard ---
+
+function StatsItem({ number, label }: { number: number, label: string }) {
+  return (
+    <div className="flex flex-col items-center text-center w-full md:w-1/4 border-b md:border-b-0 md:border-r border-white/5 last:border-0 pb-8 md:pb-0 group">
+      <span className="text-5xl md:text-6xl font-bold text-white tracking-tighter mb-2 group-hover:text-primary transition-colors duration-500">
+        {number}
+      </span>
+      <span className="text-xs font-semibold text-white/40 uppercase tracking-[0.2em] group-hover:text-white/70 transition-colors">
+        {label}
+      </span>
+    </div>
+  )
+}
+
+function CategoryCard({ category, index }: { category: any, index: number }) {
+  const Icon = getCategoryIcon(category.name)
+  
+  return (
+    <div className="flex flex-col gap-6 rounded-xl border border-white/10 bg-black hover:border-primary/50 transition-all duration-500 h-full p-6 group relative overflow-hidden">
+      {/* Hover Gradient Effect */}
+      <div className="absolute inset-0 bg-gradient-to-br from-primary/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" />
+      
+      {/* Header */}
+      <div className="flex items-center justify-between mb-2 relative z-10">
+        <div className="p-3.5 rounded-xl bg-white/5 border border-white/10 group-hover:bg-primary/10 group-hover:border-primary/30 transition-all duration-300">
+          <Icon className="w-6 h-6 text-white/70 group-hover:text-primary transition-colors" />
+        </div>
+        <span className="inline-flex items-center justify-center rounded-md px-2 py-0.5 text-xs font-medium bg-white/5 text-white/50 border border-white/10 group-hover:bg-primary/10 group-hover:text-primary group-hover:border-primary/20 transition-all">
+          {category.count} skills
+        </span>
+      </div>
+
+      {/* Content */}
+      <div className="relative z-10">
+        <h3 className="font-semibold text-xl text-white group-hover:text-primary transition-colors mb-1">
+          {category.name}
+        </h3>
+        <p className="text-sm text-white/40 group-hover:text-white/60 transition-colors mb-6">
+          Explore capabilities in {category.name.toLowerCase()}.
+        </p>
+        
+        {/* Mock Action */}
+        <div className="flex flex-wrap gap-2 mt-auto">
+          <Link to={`/browse?category=${encodeURIComponent(category.name)}`}>
+             <span className="inline-flex items-center text-xs font-medium text-white/60 bg-white/5 hover:bg-primary/10 hover:text-primary border border-white/10 hover:border-primary/30 rounded-md px-2.5 py-1.5 transition-all cursor-pointer">
+               Browse Category
+             </span>
+          </Link>
         </div>
       </div>
     </div>

@@ -39,11 +39,11 @@ export function Pagination({ currentPage, totalPages, onPageChange }: Pagination
   if (totalPages <= 1) return null
 
   return (
-    <div className="flex items-center justify-center gap-2">
+    <div className="flex items-center justify-center gap-2 mt-8">
       <button
         onClick={() => onPageChange(currentPage - 1)}
         disabled={currentPage === 1}
-        className="p-2 rounded-lg text-text-secondary hover:text-text-primary hover:bg-surface-hover disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+        className="p-2 rounded-lg text-white/40 hover:text-white hover:bg-white/5 disabled:opacity-20 disabled:cursor-not-allowed transition-colors"
       >
         <ChevronLeft className="w-5 h-5" />
       </button>
@@ -53,16 +53,16 @@ export function Pagination({ currentPage, totalPages, onPageChange }: Pagination
           <button
             key={index}
             onClick={() => onPageChange(page)}
-            className={`w-10 h-10 rounded-lg text-sm font-medium transition-colors ${
+            className={`w-10 h-10 rounded-lg text-sm font-medium transition-colors border ${
               currentPage === page
-                ? 'bg-brand text-black'
-                : 'text-text-secondary hover:text-text-primary hover:bg-surface-hover'
+                ? 'bg-primary/10 text-primary border-primary/30'
+                : 'bg-transparent text-white/60 border-transparent hover:text-white hover:bg-white/5'
             }`}
           >
             {page}
           </button>
         ) : (
-          <span key={index} className="px-2 text-text-tertiary">
+          <span key={index} className="px-2 text-white/20">
             {page}
           </span>
         )
@@ -71,7 +71,7 @@ export function Pagination({ currentPage, totalPages, onPageChange }: Pagination
       <button
         onClick={() => onPageChange(currentPage + 1)}
         disabled={currentPage === totalPages}
-        className="p-2 rounded-lg text-text-secondary hover:text-text-primary hover:bg-surface-hover disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+        className="p-2 rounded-lg text-white/40 hover:text-white hover:bg-white/5 disabled:opacity-20 disabled:cursor-not-allowed transition-colors"
       >
         <ChevronRight className="w-5 h-5" />
       </button>

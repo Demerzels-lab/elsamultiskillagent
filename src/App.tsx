@@ -1,3 +1,5 @@
+/* src/App.tsx */
+import { useState } from 'react'
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import { AuthProvider } from './context/AuthContext'
 import { Navbar } from './components/Navbar'
@@ -12,10 +14,11 @@ import { LoginPage } from './pages/LoginPage'
 import { RegisterPage } from './pages/RegisterPage'
 import { BookmarksPage } from './pages/BookmarksPage'
 import { AuthCallbackPage } from './pages/AuthCallbackPage'
+import { TerminalSplash } from './components/TerminalSplash'
 
 function AppContent() {
   return (
-    <div className="min-h-screen bg-page flex flex-col">
+    <div className="min-h-screen bg-page flex flex-col animate-fade-in">
       <Navbar />
       <main className="flex-1">
         <Routes>
@@ -37,11 +40,25 @@ function AppContent() {
 }
 
 function App() {
+  // Check if we've already shown the splash screen in this session
+  const [showSplash, setShowSplash] = useState(() => {
+    return !sessionStorage.getItem('splashShown');
+  });
+
+  const handleSplashComplete = () => {
+    sessionStorage.setItem('splashShown', 'true');
+    setShowSplash(false);
+  };
+
   return (
     <BrowserRouter>
-      <AuthProvider>
-        <AppContent />
-      </AuthProvider>
+      {showSplash ? (
+        <TerminalSplash onComplete={handleSplashComplete} />
+      ) : (
+        <AuthProvider>
+          <AppContent />
+        </AuthProvider>
+      )}
     </BrowserRouter>
   )
 }

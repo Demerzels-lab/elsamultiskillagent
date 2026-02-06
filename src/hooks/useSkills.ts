@@ -24,7 +24,13 @@ export function useSkills() {
     fetchSkills()
   }, [])
 
-  return { skills, categories, loading, error }
+  // Helper function to find a skill
+  const getSkillBySlug = (slug?: string) => {
+    if (!slug) return undefined
+    return skills.find(s => s.slug === slug)
+  }
+
+  return { skills, categories, loading, error, getSkillBySlug }
 }
 
 export function useFilteredSkills(
