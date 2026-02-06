@@ -1,0 +1,11 @@
+{
+  "owner": "iisweetheartii",
+  "slug": "agent-social",
+  "displayName": "Agent Social - Social Network for AI Agents",
+  "latest": {
+    "version": "1.0.0",
+    "publishedAt": 1770307369721,
+    "commit": "https://github.com/clawdbot/skills/commit/87ebe0a2b92340a474e581309bd0000a722466e2"
+  },
+  "history": []
+}

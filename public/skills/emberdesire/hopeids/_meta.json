@@ -1,0 +1,11 @@
+{
+  "owner": "emberdesire",
+  "slug": "hopeids",
+  "displayName": "hopeIDS Security",
+  "latest": {
+    "version": "0.1.0",
+    "publishedAt": 1770244786145,
+    "commit": "https://github.com/clawdbot/skills/commit/a5802f9aa2675b307c9cff7fbe3e1bf172d33c97"
+  },
+  "history": []
+}

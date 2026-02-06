@@ -1,0 +1,11 @@
+{
+  "owner": "dowands",
+  "slug": "reddapi",
+  "displayName": "Reddapi",
+  "latest": {
+    "version": "1.0.0",
+    "publishedAt": 1770304007737,
+    "commit": "https://github.com/clawdbot/skills/commit/377238e5619b10a019fd1310d64caf528770a9ef"
+  },
+  "history": []
+}

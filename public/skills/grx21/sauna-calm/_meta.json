@@ -1,0 +1,11 @@
+{
+  "owner": "grx21",
+  "slug": "sauna-calm",
+  "displayName": "Sauna Calm",
+  "latest": {
+    "version": "1.0.3",
+    "publishedAt": 1770324772206,
+    "commit": "https://github.com/clawdbot/skills/commit/0d1e24a72e5377a30db99afea5272b116c09d3b5"
+  },
+  "history": []
+}

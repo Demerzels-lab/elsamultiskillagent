@@ -1,0 +1,11 @@
+{
+  "owner": "mig6671",
+  "slug": "stepfun-openrouter",
+  "displayName": "StepFun via OpenRouter",
+  "latest": {
+    "version": "1.0.1",
+    "publishedAt": 1770324806784,
+    "commit": "https://github.com/clawdbot/skills/commit/20d089ab4720e3bb86afb79e015756c72d48ec6a"
+  },
+  "history": []
+}

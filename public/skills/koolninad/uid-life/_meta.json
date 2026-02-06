@@ -1,0 +1,11 @@
+{
+  "owner": "koolninad",
+  "slug": "uid-life",
+  "displayName": "UID.LIFE Marketplace",
+  "latest": {
+    "version": "1.2.0",
+    "publishedAt": 1770359588565,
+    "commit": "https://github.com/openclaw/skills/commit/160c746da477fa3a61a5ae858c475aed41ddf518"
+  },
+  "history": []
+}

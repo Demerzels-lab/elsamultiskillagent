@@ -1,0 +1,18 @@
+{
+  "bilibili": {
+    "cookies": "在这里粘贴完整的B站cookies字符串",
+    "proxy_api": ""
+  },
+  "ai": {
+    "openrouter_key": "",
+    "model": "google/gemini-3-flash-preview"
+  },
+  "email": {
+    "smtp_email": "your-email@gmail.com",
+    "smtp_password": "xxxx xxxx xxxx xxxx",
+    "recipients": ["recipient1@example.com", "recipient2@example.com"]
+  },
+  "report": {
+    "num_videos": 10
+  }
+}
