@@ -1,4 +1,0 @@
-requests
-pydantic
-tonsdk
-pynacl

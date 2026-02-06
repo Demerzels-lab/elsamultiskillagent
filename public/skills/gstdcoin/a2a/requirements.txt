@@ -1,5 +1,0 @@
-requests
-mcp
-pydantic
-tonsdk
-pynacl
