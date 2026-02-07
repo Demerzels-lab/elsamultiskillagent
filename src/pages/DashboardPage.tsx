@@ -5,6 +5,7 @@ import { LoadingSpinner } from '../components/Loading'
 import { 
   ArrowRight, 
   Github, 
+  Twitter,
   Bot, 
   Code, 
   Zap, 
@@ -83,10 +84,16 @@ export function DashboardPage() {
               <ArrowRight className="w-4 h-4" />
             </button>
           </Link>
-          <a href="https://github.com/blackdragonspear62/Molty-XBT" target="_blank" rel="noopener noreferrer">
+          <a href="https://github.com/Demerzels-lab/elsamultiskillagent" target="_blank" rel="noopener noreferrer">
             <button className="h-12 rounded-md px-6 bg-transparent border border-white/20 text-white hover:bg-white/5 hover:border-primary/50 hover:text-primary font-medium transition-all flex items-center gap-2">
               <Github className="w-4 h-4" />
               View on GitHub
+            </button>
+          </a>
+          <a href="https://x.com/elsamultiskill" target="_blank" rel="noopener noreferrer">
+            <button className="h-12 rounded-md px-6 bg-transparent border border-white/20 text-white hover:bg-white/5 hover:border-primary/50 hover:text-primary font-medium transition-all flex items-center gap-2">
+              <Twitter className="w-4 h-4" />
+              Follow on X
             </button>
           </a>
         </div>
