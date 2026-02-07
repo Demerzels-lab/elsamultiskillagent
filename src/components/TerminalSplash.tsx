@@ -13,7 +13,7 @@ export const TerminalSplash: React.FC<TerminalSplashProps> = ({ onComplete }) =>
   // The sequence of messages to display
   const bootSequence = [
     { text: "Initializing System...", color: "text-gray-500", delay: 500 },
-    { text: "Loading core modules... [OK]", color: "text-accent", delay: 800 },
+    { text: "Loading Agent Skill Protocols... [OK]", color: "text-accent", delay: 800 },
     { text: "Mounting neural pathways... [OK]", color: "text-accent", delay: 800 },
     { text: "Connecting to Orchestration Layer... [CONNECTED]", color: "text-accent", delay: 1000 },
     { text: "Loading agent protocols...", color: "text-gray-500", delay: 600 },
@@ -111,7 +111,7 @@ export const TerminalSplash: React.FC<TerminalSplashProps> = ({ onComplete }) =>
             <div className="relative w-48 h-48 rounded-full border-2 border-white/5 flex items-center justify-center shadow-[0_0_30px_rgba(var(--primary),0.2)]">
                {/* Placeholder for Logo - Using a simple Div representation */}
                <div className="w-40 h-40 bg-black rounded-full flex items-center justify-center border border-primary/20">
-                  <span className="text-4xl font-bold text-primary">M</span>
+                  <img src="/bg-anime.jpeg" alt="Anime Background" className="w-full h-full object-cover rounded-full border-2 border-white" />
                </div>
                <div className="absolute inset-0 rounded-full animate-pulse-slow ring-1 ring-primary/20"></div>
             </div>
@@ -122,7 +122,7 @@ export const TerminalSplash: React.FC<TerminalSplashProps> = ({ onComplete }) =>
             {/* Terminal Header */}
             <div className="flex items-center justify-between px-6 py-3 bg-white/5 border-b border-white/10">
               <div className="flex flex-col">
-                <span className="text-[10px] font-medium uppercase tracking-widest text-white/40">MOLTYXBT_TERMINAL</span>
+                <span className="text-[10px] font-medium uppercase tracking-widest text-white/40">ELSA_TERMINAL</span>
                 <span className="text-[8px] text-white/20 tracking-wide">接続中...</span>
               </div>
               <div className="flex gap-2">
