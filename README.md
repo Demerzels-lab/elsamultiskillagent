@@ -2,7 +2,7 @@
 
 Official X https://x.com/elsamultiskill
 
-CA :
+CA : 4NH5PJY4A33tFX4uBBgJ3sqcSe7kRmN2Zjb9koRcpump
 
 ![Build Status](https://img.shields.io/badge/SYSTEM-ONLINE-green?style=for-the-badge)
 ![Clearance Level](https://img.shields.io/badge/CLEARANCE-RESTRICTED-red?style=for-the-badge)
