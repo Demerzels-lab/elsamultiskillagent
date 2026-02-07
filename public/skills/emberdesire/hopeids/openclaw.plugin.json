@@ -1,0 +1,49 @@
+{
+  "id": "hopeids",
+  "name": "hopeIDS Security Scanner",
+  "version": "0.1.0",
+  "description": "Inference-based intrusion detection for AI agent messages",
+  "homepage": "https://github.com/E-x-O-Entertainment-Studios-Inc/hopeIDS",
+  "configSchema": {
+    "type": "object",
+    "additionalProperties": false,
+    "properties": {
+      "enabled": {
+        "type": "boolean",
+        "default": true
+      },
+      "strictMode": {
+        "type": "boolean",
+        "default": false,
+        "description": "Block suspicious messages instead of just warning"
+      },
+      "semanticEnabled": {
+        "type": "boolean",
+        "default": false,
+        "description": "Enable LLM-based semantic analysis (slower, more accurate)"
+      },
+      "llmEndpoint": {
+        "type": "string",
+        "description": "LLM endpoint for semantic analysis"
+      },
+      "logLevel": {
+        "type": "string",
+        "enum": ["debug", "info", "warn", "error"],
+        "default": "info"
+      },
+      "trustOwners": {
+        "type": "boolean",
+        "default": true,
+        "description": "Auto-trust messages from owner numbers"
+      }
+    }
+  },
+  "uiHints": {
+    "enabled": { "label": "Enable Security Scanning" },
+    "strictMode": { "label": "Strict Mode (block threats)" },
+    "semanticEnabled": { "label": "Semantic Analysis" },
+    "llmEndpoint": { "label": "LLM Endpoint", "placeholder": "http://localhost:1234/v1" },
+    "logLevel": { "label": "Log Level" },
+    "trustOwners": { "label": "Trust Owner Messages" }
+  }
+}

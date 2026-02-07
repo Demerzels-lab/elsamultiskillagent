@@ -24,7 +24,7 @@ export const TerminalSplash: React.FC<TerminalSplashProps> = ({ onComplete }) =>
     { text: "System check complete.", color: "text-gray-500", delay: 500 },
     { text: " ", color: "text-transparent", delay: 100 },
     { text: "═══════════════════════════════════════════════════", color: "text-white font-bold", delay: 100 },
-    { text: "   MOLTYXBT v2.0.0 / System Ready", color: "text-primary font-bold", delay: 100 },
+    { text: "   ELSA v2.0.0 / System Ready", color: "text-primary font-bold", delay: 100 },
     { text: "   Intelligent Multi-Agent Orchestration System", color: "text-gray-500", delay: 100 },
     { text: "═══════════════════════════════════════════════════", color: "text-white font-bold", delay: 100 },
     { text: " ", color: "text-transparent", delay: 500 },

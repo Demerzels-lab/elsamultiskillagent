@@ -1,0 +1,17 @@
+{
+  "owner": "thomaslwang",
+  "slug": "moltguard",
+  "displayName": "moltguard",
+  "latest": {
+    "version": "1.1.0",
+    "publishedAt": 1770306512990,
+    "commit": "https://github.com/clawdbot/skills/commit/a1b3bcb16ccd09932d1f1a60bd74c94655106e9c"
+  },
+  "history": [
+    {
+      "version": "1.0.0",
+      "publishedAt": 1769912401534,
+      "commit": "https://github.com/clawdbot/skills/commit/1ea3e95053b56c505f0c4ae6cb9ea2b6d04476f4"
+    }
+  ]
+}

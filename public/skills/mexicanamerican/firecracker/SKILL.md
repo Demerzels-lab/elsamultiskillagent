@@ -1,0 +1,3 @@
+---
+name: firecracker
+description: Use Firecracker microVM CLI to create, manage, and run secure, fast-booting (~125ms) virtual machines for isolated tasks, sandboxing untrusted code, ephemeral dev envs, agent isolation, reproducible testbeds, and air-gapped deps. Use for: risky exec/sessions_spawn in VMs, multi-model runs, Docker alternative on RPi/arm64. Supports API sock control, config JSON, kernel/rootfs mgmt. First read this SKILL.md, then scripts/download.sh (setup), scripts/quick-vm.sh (usage), references/api.md (advanced).

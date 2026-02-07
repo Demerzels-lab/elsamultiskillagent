@@ -1,0 +1,11 @@
+{
+  "owner": "awlevin",
+  "slug": "flight-search",
+  "displayName": "Flight Search",
+  "latest": {
+    "version": "1.0.0",
+    "publishedAt": 1770357958746,
+    "commit": "https://github.com/openclaw/skills/commit/2afe1494804a18df51bc50957e794c5e81912c30"
+  },
+  "history": []
+}

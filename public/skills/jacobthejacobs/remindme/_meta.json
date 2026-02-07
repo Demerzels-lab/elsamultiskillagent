@@ -1,0 +1,11 @@
+{
+  "owner": "jacobthejacobs",
+  "slug": "remindme",
+  "displayName": "Remind Me",
+  "latest": {
+    "version": "1.1.2",
+    "publishedAt": 1770336566682,
+    "commit": "https://github.com/clawdbot/skills/commit/5a91443ee08eea19d42a6a07545d6d2dd63bda0c"
+  },
+  "history": []
+}

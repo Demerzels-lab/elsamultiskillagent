@@ -1,0 +1,11 @@
+{
+  "owner": "matanle51",
+  "slug": "agentic-paper-digest-skill",
+  "displayName": "Agentic Research Paper Digest",
+  "latest": {
+    "version": "0.3.1",
+    "publishedAt": 1770281850272,
+    "commit": "https://github.com/clawdbot/skills/commit/b96419ba6b82afff33e4423cf35be7febd396417"
+  },
+  "history": []
+}

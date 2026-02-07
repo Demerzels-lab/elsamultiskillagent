@@ -1,0 +1,11 @@
+{
+  "owner": "back2matching",
+  "slug": "snakey",
+  "displayName": "Snakey",
+  "latest": {
+    "version": "1.0.1",
+    "publishedAt": 1770302326668,
+    "commit": "https://github.com/clawdbot/skills/commit/6c2e288de4fe31257b08f96deb481c24b095b440"
+  },
+  "history": []
+}

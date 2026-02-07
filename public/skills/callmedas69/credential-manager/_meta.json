@@ -1,0 +1,11 @@
+{
+  "owner": "callmedas69",
+  "slug": "credential-manager",
+  "displayName": "Credential Manager",
+  "latest": {
+    "version": "1.1.0",
+    "publishedAt": 1770299849985,
+    "commit": "https://github.com/clawdbot/skills/commit/c6dc5fca9ef422d4c3cf53005c6e62234610a9cf"
+  },
+  "history": []
+}

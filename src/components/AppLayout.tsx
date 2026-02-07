@@ -12,7 +12,7 @@ export function AppLayout({ children }: AppLayoutProps) {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
 
   return (
-    <div className="min-h-screen bg-page text-white font-sans selection:bg-primary/30 relative">
+    <div className="min-h-screen text-white font-sans selection:bg-primary/30 relative">
       
       {/* Background Layer */}
       <InteractiveBackground />

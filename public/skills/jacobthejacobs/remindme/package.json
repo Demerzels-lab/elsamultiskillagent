@@ -1,0 +1,19 @@
+{
+    "name": "remindme",
+    "version": "1.0.6",
+    "description": "⏰ One-tap, deadlock-free Telegram reminders for OpenClaw.",
+    "keywords": [
+        "telegram",
+        "reminders",
+        "cron",
+        "scheduling",
+        "remindme"
+    ],
+    "type": "module",
+    "scripts": {
+        "start": "node --import tsx index.ts"
+    },
+    "dependencies": {
+        "commander": "^12.0.0"
+    }
+}

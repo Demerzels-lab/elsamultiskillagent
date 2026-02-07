@@ -1,0 +1,11 @@
+{
+  "owner": "dannyshmueli",
+  "slug": "table-image-generator",
+  "displayName": "Table Image",
+  "latest": {
+    "version": "1.1.1",
+    "publishedAt": 1770286449602,
+    "commit": "https://github.com/clawdbot/skills/commit/13c44ec28cb0f1359dcb95112b05a7e522d96431"
+  },
+  "history": []
+}

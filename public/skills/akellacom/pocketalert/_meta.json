@@ -1,0 +1,11 @@
+{
+  "owner": "akellacom",
+  "slug": "pocketalert",
+  "displayName": "Pocket Alert",
+  "latest": {
+    "version": "1.0.0",
+    "publishedAt": 1769861527070,
+    "commit": "https://github.com/clawdbot/skills/commit/50c47efb794606c19fe5d044db18507d375ed53d"
+  },
+  "history": []
+}
