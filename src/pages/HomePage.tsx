@@ -41,7 +41,7 @@ export function HomePage() {
         {/* Subheadline */}
         <p className="text-lg md:text-xl text-white/50 max-w-2xl mx-auto mb-10 leading-relaxed animate-fade-in [animation-delay:400ms]">
           The complete ecosystem for AI coding agents. Access 
-          <span className="text-white font-medium"> {skills.length} skills</span>, 
+          <span className="text-white font-medium"> 1700+ OpenClaw skills</span>, 
           deploy specialized agents, and automate complex workflows with a single command.
         </p>
 
