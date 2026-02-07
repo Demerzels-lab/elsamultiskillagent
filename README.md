@@ -1,5 +1,9 @@
 # ELSA: ENHANCED LOGICAL SYSTEMS ARCHITECTURE (Mk-IV)
 
+Official X https://x.com/elsamultiskill
+
+CA :
+
 ![Build Status](https://img.shields.io/badge/SYSTEM-ONLINE-green?style=for-the-badge)
 ![Clearance Level](https://img.shields.io/badge/CLEARANCE-RESTRICTED-red?style=for-the-badge)
 ![Architecture](https://img.shields.io/badge/ARCHITECTURE-HYBRID_MONOREPO-blue?style=for-the-badge)
